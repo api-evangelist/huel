@@ -1,18 +1,78 @@
 aid: huel
 name: Huel
-description: 'Huel is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Huel (a contraction of "Human Fuel") is a British nutritionally-complete
+  food company founded in June 2015 by Julian Hearn with nutritionist James Collier,
+  headquartered in Tring, Hertfordshire, and operating offices in the UK, US and Europe.
+  It sells plant-based, nutritionally complete powders, ready-to-drink shakes, hot
+  and savoury instant meals, bars and supplements direct to consumers in more than
+  100 countries, reporting GBP 214 million of revenue in FY2024. Danone SA agreed to
+  acquire Huel in March 2026 in a deal reported at roughly EUR 1 billion / USD 1.1
+  billion. Huel is a direct-to-consumer commerce and subscription business, not an
+  API provider: it publishes no developer portal, no API documentation and no
+  machine-readable API contract. Its storefront runs as a Next.js application on
+  Vercel in front of a Shopify commerce backend; the only anonymously callable
+  machine-readable surface observed on a Huel-controlled host is the standard
+  Discourse platform REST API served by its North American customer community at
+  discourse.huel.com.'
+image: https://cdn.huel.io/favicons/android-icon-192x192.png
 url: https://raw.githubusercontent.com/api-evangelist/huel/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pass-2026-08-01
 specificationVersion: '0.20'
 created: '2026-08-01'
 modified: '2026-08-01'
 tags:
 - Company
-apis: []
+- Food and Beverage
+- Nutrition
+- Consumer Packaged Goods
+- Direct to Consumer
+- E-Commerce
+- Subscription Commerce
+- Health and Wellness
+- Retail
+- United Kingdom
+apis:
+- aid: huel:community
+  name: Huel Community API (Discourse)
+  description: 'The Huel US customer forum at discourse.huel.com runs Discourse
+    2026.8.0 and therefore serves the standard Discourse REST API on a Huel-controlled
+    host. Anonymous GET requests to /site.json, /categories.json, /latest.json and
+    /about.json return real JSON (verified 2026-08-01). This is the Discourse
+    platform contract, not an API Huel authored, documented or supports: Huel
+    publishes no reference for it and offers no developer programme. Recorded here
+    because it is the only anonymously callable machine-readable surface found across
+    every Huel host probed.'
+  humanURL: https://discourse.huel.com/
+  baseURL: https://discourse.huel.com
+  tags:
+  - Community
+  - Forum
+  - Discourse
+  properties:
+  - type: Authentication
+    url: authentication/huel-authentication.yml
+  x-evidence:
+    fetched: '2026-08-01'
+    platform: Discourse 2026.8.0-latest.1
+    first_party_contract: false
+    probes:
+    - url: https://discourse.huel.com/about.json
+      http_status: 200
+      content_type: application/json
+    - url: https://discourse.huel.com/site.json
+      http_status: 200
+      content_type: application/json
+    - url: https://discourse.huel.com/categories.json
+      http_status: 200
+      content_type: application/json
+    - url: https://discourse.huel.com/latest.json
+      http_status: 200
+      content_type: application/json
+    - url: https://discourse.huel.com/openapi.json
+      http_status: 404
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +80,45 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
+  url: https://huel.com/
+- type: About
+  url: https://huel.com/pages/about-us
+- type: Support
+  url: https://huel.com/pages/contact-us
+- type: HelpCenter
+  url: https://huel.com/pages/faq
+- type: Community
+  url: https://discourse.huel.com/
+- type: Blog
+  url: https://huel.com/pages/journal
+- type: TermsOfService
+  url: https://huel.com/pages/terms-and-conditions
+- type: PrivacyPolicy
+  url: https://huel.com/pages/privacy-policy
+- type: Accessibility
+  url: https://huel.com/pages/accessibility-policy
+- type: SignUp
+  url: https://huel.com/account/login
+- type: GitHubOrganization
+  url: https://github.com/huel-global
+- type: Careers
+  url: https://careers.huel.com/jobs
+- type: Press
+  url: https://huel.com/pages/press-coverage
+- type: Sustainability
+  url: https://huel.com/pages/sustainability-page
+- type: Packages
+  url: packages/huel-packages.yml
+- type: Authentication
+  url: authentication/huel-authentication.yml
+- type: DomainSecurity
+  url: security/huel-domain-security.yml
+- type: LLMsTxt
+  url: llms/huel-llms.txt
+- type: SecondaryMarket
   url: https://forgeglobal.com/huel_stock/
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 5
+  pass: local-v1

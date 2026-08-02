@@ -1,0 +1,14 @@
+{
+  "repo": "huel",
+  "feeds": [
+    {
+      "source": "https://discourse.huel.com/",
+      "feed_url": "https://discourse.huel.com/posts.rss",
+      "title": "",
+      "saved": 3,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 3,
+  "fetched": "2026-08-01T15:49:00Z"
+}

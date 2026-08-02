@@ -1,0 +1,68 @@
+generated: '2026-08-01'
+method: searched
+source: https://discourse.huel.com/site.json
+docs: https://docs.discourse.org/
+summary:
+  types: [none, apiKey]
+  api_key_in: [header]
+  oauth2_flows: []
+  first_party_auth_docs: false
+notes: >-
+  Huel operates no developer programme and publishes no authentication
+  documentation, because it exposes no first-party API. This profile describes the
+  authentication model of the one anonymously callable machine-readable surface found
+  on a Huel-controlled host: the Discourse platform REST API served by the Huel US
+  customer forum at discourse.huel.com (Discourse 2026.8.0). The auth model is
+  Discourse's, documented upstream at docs.discourse.org, not something Huel authored.
+  There is no OpenAPI in this repo, so nothing here was derived from securitySchemes;
+  the anonymous tier below was verified by live probe and the keyed tier is the
+  documented Discourse contract.
+schemes:
+- name: anonymous
+  type: none
+  description: >-
+    Public read endpoints require no credential. Verified 2026-08-01: GET
+    /about.json, /site.json, /categories.json, /latest.json and /users/{username}.json
+    all returned HTTP 200 application/json without authentication.
+  verified: true
+  evidence:
+  - {url: 'https://discourse.huel.com/about.json', http_status: 200}
+  - {url: 'https://discourse.huel.com/site.json', http_status: 200}
+  - {url: 'https://discourse.huel.com/categories.json', http_status: 200}
+  - {url: 'https://discourse.huel.com/latest.json', http_status: 200}
+  - {url: 'https://discourse.huel.com/users/system.json', http_status: 200}
+- name: discourse-api-key
+  type: apiKey
+  in: header
+  names: [Api-Key, Api-Username]
+  description: >-
+    Discourse admin-issued API keys are sent as the Api-Key header together with an
+    Api-Username header naming the acting user. Keys are minted only from the forum
+    admin panel; Huel publishes no self-service issuance path, so this tier is not
+    available to third-party developers.
+  self_service: false
+  verified: false
+  note: >-
+    Documented Discourse platform behaviour (docs.discourse.org), not observed on this
+    host - admin endpoints such as /admin/users/list/active.json return 404 to
+    anonymous callers rather than a 401/403 challenge.
+- name: discourse-user-api-key
+  type: apiKey
+  in: header
+  names: [User-Api-Key]
+  description: >-
+    Discourse's per-user API key flow for third-party clients, negotiated through
+    /user-api-key/new with an RSA public key. Also a Discourse platform capability
+    rather than a Huel-published one.
+  self_service: false
+  verified: false
+end_user_identity:
+  description: >-
+    Forum sign-in for humans (not an API credential path). site.json advertises two
+    social auth providers alongside local accounts.
+  providers: [facebook, twitter/x, local]
+  login_required: false
+absent:
+- {scheme: oauth2, reason: no OAuth authorization server found on any Huel host}
+- {scheme: openIdConnect, reason: '/.well-known/openid-configuration returned 404'}
+- {scheme: mutualTLS, reason: not published}

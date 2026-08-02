@@ -1,0 +1,74 @@
+generated: '2026-08-01'
+method: searched
+source: https://packagist.org/search.json?q=huel
+summary: >-
+  Huel publishes three PHP packages on Packagist under the huel-global vendor
+  namespace, matching its GitHub organisation. All three are CLIENT LIBRARIES FOR
+  THIRD-PARTY APIS that Huel consumes as a merchant (Recharge Payments, Trustpilot,
+  Shopify) - they are NOT SDKs for a Huel API, because Huel has no API. No `SDKs`
+  pointer is wired into apis.yml for that reason: the sdk_count check measures client
+  libraries for the provider's own API, and awarding it here would misrepresent Huel
+  as an API provider. Nothing first-party was found on npm, PyPI, RubyGems, NuGet,
+  Maven Central, pkg.go.dev or crates.io.
+registries_checked:
+- {registry: packagist, result: 3 first-party packages}
+- {registry: npm, result: none first-party (only unrelated surname-suffixed packages)}
+- {registry: pypi, result: 404 for "huel"}
+- {registry: rubygems, result: 404 for "huel"}
+- {registry: nuget, result: none}
+- {registry: maven-central, result: none}
+- {registry: pkg.go.dev, result: none}
+- {registry: crates.io, result: none}
+packages:
+- language: php
+  registry: packagist
+  name: huel-global/recharge
+  description: PHP wrapper for the reCharge Payments API
+  url: https://packagist.org/packages/huel-global/recharge
+  repository: https://github.com/huel-global/recharge
+  install: composer require huel-global/recharge
+  official: true
+  downloads_total: 1082
+  targets_api: third-party (Recharge Payments)
+  note: >-
+    Packagist listing is live; the backing GitHub repository now returns 404, so the
+    package is effectively unmaintained.
+- language: php
+  registry: packagist
+  name: huel-global/trustpilot
+  description: Simple PHP library for the TrustPilot API
+  url: https://packagist.org/packages/huel-global/trustpilot
+  repository: https://github.com/huel-global/trustpilot
+  install: composer require huel-global/trustpilot
+  official: true
+  downloads_total: 248
+  versions: ['0.1']
+  abandoned: true
+  archived: true
+  targets_api: third-party (Trustpilot)
+- language: php
+  registry: packagist
+  name: huel-global/shopify
+  url: https://packagist.org/packages/huel-global/shopify
+  repository: https://github.com/huel-global/shopify
+  install: composer require huel-global/shopify
+  official: true
+  downloads_total: 183
+  abandoned: true
+  archived: true
+  targets_api: third-party (Shopify)
+other_github_repositories:
+- name: deno-lambda
+  url: https://github.com/huel-global/deno-lambda
+  language: TypeScript
+  license: MIT
+  description: A Deno runtime for AWS Lambda
+  published_to_registry: false
+  note: Infrastructure tooling, not a client library. Last updated 2025-06-27.
+- name: action-shopify
+  url: https://github.com/huel-global/action-shopify
+  language: Dockerfile
+  license: MIT
+  description: Publish a Shopify theme with Theme Kit on GitHub Actions
+  published_to_registry: false
+  archived: true

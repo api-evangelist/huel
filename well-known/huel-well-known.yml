@@ -1,0 +1,122 @@
+generated: '2026-08-01'
+method: probed
+source: live HTTP probes of every Huel-controlled host found in apis.yml
+summary: >-
+  No /.well-known/ discovery document was found on any Huel host. No security.txt,
+  no OpenID Connect or OAuth authorization-server metadata, no api-catalog, no
+  ai-plugin.json and no A2A agent card. Nothing was written to well-known/ beyond
+  this probe log and no WellKnown, SecurityTxt or AgentCard pointer was wired into
+  apis.yml, because no document exists to point at.
+caveat: >-
+  huel.com and its locale hosts are a Next.js application on Vercel with a catch-all
+  route: any unmatched path returns HTTP 200 with the ~928KB HTML homepage shell.
+  /llms.txt, /security.txt and /openapi.json all answer 200 text/html with that same
+  shell and are therefore FALSE POSITIVES, recorded below as false_positive: true.
+  Only /.well-known/* paths return a true 404 on that host. discourse.huel.com and
+  careers.huel.com return honest 404 HTML error pages.
+hosts:
+- host: https://huel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /security.txt
+    status: 200
+    content_type: text/html
+    false_positive: true
+    note: Next.js catch-all returned the homepage HTML shell, not an RFC 9116 document.
+  - path: /llms.txt
+    status: 200
+    content_type: text/html
+    false_positive: true
+    note: Next.js catch-all returned the homepage HTML shell, not an llms.txt document.
+  - path: /openapi.json
+    status: 200
+    content_type: text/html
+    false_positive: true
+    note: Next.js catch-all returned the homepage HTML shell, not an OpenAPI document.
+  - path: /robots.txt
+    status: 200
+    content_type: text/plain
+    note: >-
+      Real robots.txt (1,438 bytes). Disallows /cart, /search? and /account; declares
+      https://huel.com/sitemap.xml. Carries no Content-Signal / AIPREF directive.
+- host: https://uk.huel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/html
+    false_positive: true
+- host: https://eu.huel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/html
+    false_positive: true
+- host: https://de.huel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /llms.txt
+    status: 200
+    content_type: text/html
+    false_positive: true
+- host: https://discourse.huel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+- host: https://careers.huel.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /robots.txt
+    status: 200
+    content_type: text/plain
+    note: >-
+      Teamtailor-hosted careers site. Its robots.txt carries a Content-Signal
+      directive - "search=yes, ai-train=no, ai-input=yes" - but this is a Teamtailor
+      platform default served on a Huel subdomain, not a signal Huel authored, and it
+      is absent from huel.com itself. Not treated as a consent/identity artifact.
+subdomains_checked:
+- {host: api.huel.com, dns: NXDOMAIN}
+- {host: developer.huel.com, dns: NXDOMAIN}
+- {host: developers.huel.com, dns: NXDOMAIN}
+- {host: status.huel.com, dns: NXDOMAIN}
+- {host: trust.huel.com, dns: NXDOMAIN}
+- {host: security.huel.com, dns: NXDOMAIN}
+- {host: account.huel.com, dns: NXDOMAIN}
+- {host: graphql.huel.com, dns: NXDOMAIN}
+- {host: mcp.huel.com, dns: NXDOMAIN}
+- host: docs.huel.com
+  dns: resolves
+  note: >-
+    S3 bucket docs.huel.com in eu-west-2 with public list permission, HTTP only (no
+    TLS listener). Contains a single 2018 marketing PDF (Huel_BK3_Screen.pdf). Not
+    developer documentation and not an API surface.
