@@ -14,6 +14,17 @@ description: 'Huel (a contraction of "Human Fuel") is a British nutritionally-co
   machine-readable surface observed on a Huel-controlled host is the standard
   Discourse platform REST API served by its North American customer community at
   discourse.huel.com.'
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://cdn.huel.io/favicons/android-icon-192x192.png
 url: https://raw.githubusercontent.com/api-evangelist/huel/refs/heads/main/apis.yml
 x-type: company
