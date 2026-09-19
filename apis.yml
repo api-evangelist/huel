@@ -73,6 +73,10 @@ apis:
   baseURL: https://discourse.huel.com
   tags:
   - Community
+  - Forums
+  - Discourse
+  tags_raw:
+  - Community
   - Forum
   - Discourse
   properties:
